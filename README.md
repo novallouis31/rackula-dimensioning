@@ -33,18 +33,19 @@
 
 Ce dépôt est un fork de **Rackula** (MIT, © Gareth Evans) qui conserve toutes les fonctionnalités amont et ajoute un module de **dimensionnement de baie** issu de [`rack-42u-planner`](https://github.com/novallouis31/rack-42u-planner) :
 
-- bouton flottant **⚡ Dimensionnement** : TDP (W et BTU/h), poids total, puissance théorique, courant, capacité et charge **PDU** ;
-- calcul des **câbles** à partir des connexions port-à-port de Rackula (type, longueur, marge) et génération des **étiquettes** des deux extrémités ;
-- exports **Excel (.xlsx)**, **CSV pour Google Sheets** et planche d'étiquettes HTML ;
-- éditeur de métadonnées par type d'équipement (puissance, TDP, PDU, montage horizontal/vertical) stocké dans les `custom_fields` natifs de Rackula ;
-- 10 tests de non-régression sur une baie type, typage et budget bundle vérifiés.
+- bouton flottant **⚡ Dimensionnement** : TDP (W et BTU/h), poids, puissance, courant, capacité et charge **PDU** ;
+- **nommage de chaque équipement** et proposition d'un numéro de port entrée/sortie (`ETH-IN-01`, `FIB-OUT-02`, `PWR-IN-01`…) ;
+- calcul des **câbles** (type, longueur, marge) et étiquettes des deux extrémités au format traditionnel _source / port / destination / port_, avec **QR code** sur une planche A4 imprimable ;
+- exports **Excel (.xlsx)** avec **matrice de câblage** (équipements et ports), **CSV pour Google Sheets**, planche d'étiquettes HTML ;
+- éditeur de métadonnées par type d'équipement dans les `custom_fields` natifs de Rackula ;
+- 16 tests de non-régression sur une baie type, typage et budget bundle vérifiés.
 
 Documentation complète : [docs/DIMENSIONNEMENT.md](docs/DIMENSIONNEMENT.md).
 
 ```bash
 npm install
 npm run dev            # puis cliquer sur ⚡ Dimensionnement
-npx vitest run src/lib/dimensioning/engine.test.ts
+npx vitest run src/lib/dimensioning
 ```
 
 ---

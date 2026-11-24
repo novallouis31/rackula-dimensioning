@@ -82,6 +82,12 @@ export function dimensionedDevices(layout: Layout): DimensionedDevice[] {
         mount,
         pduAmps: readNum(type, device, "pduAmps", 0),
         pduVolts: readNum(type, device, "pduVolts", 230),
+        ports: (device.ports ?? []).map((port) => ({
+          id: port.id,
+          name: port.label || port.template_name,
+          label: port.label || port.template_name,
+          kind: portKind(port.type),
+        })),
       });
     }
   }

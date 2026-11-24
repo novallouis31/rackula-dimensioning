@@ -26,6 +26,13 @@ export interface DimensioningSettings {
   pduVoltage: number;
   /** Déclassement d'usage continu des PDU */
   pduDerating: number;
+  /**
+   * Modèle d'étiquette (format traditionnel : source/port puis destination/port).
+   * Jetons : {CABLE} {END} {DEVICE} {PORT} {PEER_DEVICE} {PEER_PORT}
+   * {RACK} {U} {PEER_RACK} {PEER_U} {TYPE} {LEN} {ROLE}.
+   * Les \n deviennent des sauts de ligne.
+   */
+  labelFormat: string;
 }
 
 export const DEFAULT_SETTINGS: DimensioningSettings = {
@@ -38,6 +45,8 @@ export const DEFAULT_SETTINGS: DimensioningSettings = {
   minLengthM: 0.5,
   pduVoltage: 230,
   pduDerating: 0.8,
+  labelFormat:
+    "{DEVICE} / {PORT}\n{PEER_DEVICE} / {PEER_PORT}\n{CABLE}-{END} · {TYPE} · {LEN} m\n{RACK}/U{U} · {ROLE}",
 };
 
 /** Préfixe des clés dans `custom_fields`. */
@@ -61,6 +70,7 @@ export interface DimensionedDevice {
   mount: "horizontal" | "vertical";
   pduAmps: number;
   pduVolts: number;
+  ports: { id: string; name: string; label: string; kind: PortKind }[];
 }
 
 export interface DimensionedCable {

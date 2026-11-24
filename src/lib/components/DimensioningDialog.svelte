@@ -6,6 +6,7 @@
 <script lang="ts">
   import { getLayoutStore } from "$lib/stores/layout.svelte";
   import { computeDimensioning, getSettings } from "$lib/dimensioning/engine";
+  import { applyNaming, proposeNaming } from "$lib/dimensioning/naming";
   import { DIM_PREFIX } from "$lib/dimensioning/types";
   import {
     downloadBlob,
@@ -27,6 +28,7 @@
   });
   const layout = $derived(layoutStore.layout);
   const result = $derived(computeDimensioning(layout, custom));
+  const proposal = $derived(proposeNaming(layout));
   const slugs = $derived(
     [...new Set(result.devices.map((d) => d.typeSlug))].sort(),
   );
@@ -37,6 +39,7 @@
   let metaAmps = $state(0);
   let metaVolts = $state(230);
   let metaMount = $state("horizontal");
+  let namingMessage = $state("");
 
   $effect(() => {
     const firstSlug = slugs[0];
@@ -71,21 +74,44 @@
     });
   }
 
+  /** Applique les noms et les numéros de port proposés (sans écraser l'existant). */
+  function applyProposals(force = false) {
+    const changes = applyNaming(layout, proposal, {
+      overwriteNames: force,
+      overwriteLabels: force,
+    });
+    namingMessage = `${changes} élément(s) mis à jour`;
+  }
+
+  /** Renommage d'un équipement via l'action enregistrée de Rackula (undo/redo). */
+  function renameDevice(deviceId: string, name: string) {
+    for (const rack of layout.racks) {
+      const index = rack.devices.findIndex((d) => d.id === deviceId);
+      if (index >= 0) {
+        layoutStore.updateDeviceName(rack.id, index, name || undefined);
+        return;
+      }
+    }
+  }
+
   async function runExport(kind: "xlsx" | "csv" | "labels") {
     busy = true;
     try {
       if (kind === "xlsx") {
         downloadBlob(
-          await exportXlsx(layout.name, result),
+          await exportXlsx(layout.name, result, custom),
           "dimensionnement-rack.xlsx",
         );
       } else if (kind === "csv") {
         downloadBlob(
-          await exportCsvZip(layout.name, result),
+          await exportCsvZip(layout.name, result, custom),
           "dimensionnement-csv.zip",
         );
       } else {
-        downloadBlob(exportLabelsHtml(result), "etiquettes-cablage.html");
+        downloadBlob(
+          await exportLabelsHtml(result, custom),
+          "etiquettes-cablage.html",
+        );
       }
     } finally {
       busy = false;
@@ -215,6 +241,66 @@
               </tbody>
             </table>
           </div>
+        </section>
+
+        <section class="dim-section">
+          <h3>Nommage &amp; numérotation des ports</h3>
+          <p class="dim-hint">
+            Chaque équipement reçoit un nom (SRV-01, SW-01, PDU-A…) et ses ports
+            des étiquettes <code>ETH-IN-01</code>, <code>FIB-OUT-02</code>,
+            <code>PWR-IN-01</code> selon leur type et leur direction.
+          </p>
+          <div class="dim-actions">
+            <button class="dim-btn" onclick={() => applyProposals(false)}>
+              Proposer noms &amp; ports
+            </button>
+            <button class="dim-btn ghost" onclick={() => applyProposals(true)}>
+              Tout renommer (forcer)
+            </button>
+            {#if namingMessage}<span class="dim-hint">{namingMessage}</span
+              >{/if}
+          </div>
+          <div class="dim-scroll">
+            <table>
+              <thead
+                ><tr><th>Type</th><th>Nom</th><th>Ports proposés</th></tr
+                ></thead
+              >
+              <tbody>
+                {#each result.devices as device (device.id)}
+                  <tr>
+                    <td>{device.typeSlug}</td>
+                    <td>
+                      <input
+                        class="dim-name"
+                        value={device.name}
+                        onchange={(event) =>
+                          renameDevice(device.id, event.currentTarget.value)}
+                      />
+                      <span class="dim-hint"
+                        >→ {proposal.deviceNames[device.id]}</span
+                      >
+                    </td>
+                    <td class="mono">
+                      {device.ports
+                        .slice(0, 6)
+                        .map(
+                          (port) => proposal.portLabels[port.id] ?? port.label,
+                        )
+                        .join(", ")}{device.ports.length > 6 ? "…" : ""}
+                    </td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+          <label class="dim-format">
+            Modèle d'étiquette (source / port, puis destination / port) — jetons
+            : CABLE, END, DEVICE, PORT, PEER_DEVICE, PEER_PORT, RACK, U,
+            PEER_RACK, PEER_U, TYPE, LEN, ROLE (entre accolades). Les sauts de
+            ligne saisis dans le champ sont conservés.
+            <textarea bind:value={custom.labelFormat} rows="3"></textarea>
+          </label>
         </section>
 
         <section class="dim-section">
@@ -527,6 +613,40 @@
   .dim-hint code {
     font-family: Consolas, monospace;
     font-size: 10px;
+  }
+  .dim-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .dim-name {
+    background: #111827;
+    color: #e7e9ee;
+    border: 1px solid #475569;
+    border-radius: 5px;
+    padding: 4px 6px;
+    width: 110px;
+  }
+  .dim-format {
+    display: block;
+    font-size: 11px;
+    color: #9aa3b5;
+    margin-top: 10px;
+  }
+  .dim-format textarea {
+    display: block;
+    width: 100%;
+    margin-top: 4px;
+    background: #111827;
+    color: #e7e9ee;
+    border: 1px solid #475569;
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    resize: vertical;
   }
   .dim-foot {
     display: flex;

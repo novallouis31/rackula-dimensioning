@@ -110,11 +110,14 @@ describe("exports", () => {
   const result = computeDimensioning(REFERENCE_LAYOUT);
   const tables = buildTables("Baie TYPE", result);
 
-  it("produit les 6 feuilles attendues", () => {
+  it("produit les 9 feuilles attendues", () => {
     expect(tables.map((t) => t.name)).toEqual([
       "Synthese",
       "Baies",
       "Equipements",
+      "EquipementsPorts",
+      "MatriceCablage",
+      "MatricePorts",
       "Cables",
       "Etiquettes",
       "Types",
@@ -130,16 +133,18 @@ describe("exports", () => {
     expect(blob.size).toBeGreaterThan(1000);
     const zip = await JSZip.loadAsync(await blob.arrayBuffer());
     expect(zip.file("xl/workbook.xml")).toBeTruthy();
-    expect(zip.file("xl/worksheets/sheet4.xml")).toBeTruthy();
-    const sheet = await zip.file("xl/worksheets/sheet4.xml")!.async("string");
-    expect(sheet).toContain("CBL-0001");
+    const sheets = Object.values(zip.files)
+      .filter((f) => !f.dir && f.name.startsWith("xl/worksheets/sheet"))
+      .map((f) => f.async("string"));
+    const contents = await Promise.all(sheets);
+    expect(contents.some((xml) => xml.includes("CBL-0001"))).toBe(true);
   });
 
   it("génère un CSV et une planche d'étiquettes", async () => {
     const csv = toCsv(tables[0].rows);
     expect(csv).toContain("Projet");
     expect(csv.startsWith("\ufeff")).toBe(true);
-    const html = await exportLabelsHtml(result).text();
+    const html = await (await exportLabelsHtml(result)).text();
     expect(html).toContain("CBL-0001A");
     // eslint-disable-next-line no-restricted-syntax -- deux étiquettes par câble
     expect(html.match(/class="label"/g)).toHaveLength(24);

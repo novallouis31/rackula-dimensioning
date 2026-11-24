@@ -126,9 +126,7 @@ const deviceTypes: DeviceType[] = [
     iface("PSU-01", IF.c14),
     iface("PSU-02", IF.c14),
   ]),
-  type("kvm-1u", "other", 1, 8, { powerW: 60, tdpW: 60 }, [
-    iface("PSU", IF.c14),
-  ]),
+  type("kvm-1u", "kvm", 1, 8, { powerW: 60, tdpW: 60 }, [iface("PSU", IF.c14)]),
   type("ups-3u", "power", 3, 45, {}, [iface("in", IF.c14)]),
   type("patch-24", "patch-panel", 1, 3, {}, [
     ...Array.from({ length: 8 }, (_, i) =>

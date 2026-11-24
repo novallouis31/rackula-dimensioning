@@ -1,6 +1,12 @@
 /** Agrégation des données de dimensionnement et génération des livrables. */
 import JSZip from "jszip";
-import type { DimensioningResult } from "./types";
+import QRCode from "qrcode";
+import type {
+  DimensionedCable,
+  DimensioningResult,
+  DimensioningSettings,
+} from "./types";
+import { DEFAULT_SETTINGS } from "./types";
 import { buildXlsx, type XlsxSheet } from "./xlsx";
 
 function quote(value: string | number): string {
@@ -14,10 +20,54 @@ export function toCsv(rows: (string | number)[][]): string {
   );
 }
 
+/** Remplace les jetons du modèle d'étiquette. */
+export function renderLabel(
+  cable: DimensionedCable,
+  end: "A" | "B",
+  format = DEFAULT_SETTINGS.labelFormat,
+): string[] {
+  const localDevice = end === "A" ? cable.aDevice : cable.bDevice;
+  const localPort = end === "A" ? cable.aPort : cable.bPort;
+  const localRack = end === "A" ? cable.aRack : cable.bRack;
+  const localU = end === "A" ? cable.aU : cable.bU;
+  const peerDevice = end === "A" ? cable.bDevice : cable.aDevice;
+  const peerPort = end === "A" ? cable.bPort : cable.aPort;
+  const values: Record<string, string> = {
+    CABLE: cable.id,
+    END: end,
+    DEVICE: localDevice,
+    PORT: localPort,
+    PEER_DEVICE: peerDevice,
+    PEER_PORT: peerPort,
+    RACK: localRack,
+    U: String(localU),
+    PEER_RACK: end === "A" ? cable.bRack : cable.aRack,
+    PEER_U: String(end === "A" ? cable.bU : cable.aU),
+    TYPE: cable.cableType,
+    LEN: cable.lengthM.toFixed(1),
+    ROLE: cable.role || "",
+  };
+  return format
+    .replace(
+      /\{(CABLE|END|DEVICE|PORT|PEER_DEVICE|PEER_PORT|RACK|U|PEER_RACK|PEER_U|TYPE|LEN|ROLE)\}/g,
+      (_, key) => values[key] ?? "",
+    )
+    .split(/\r?\n/)
+    .filter((line, index, all) => line.trim() !== "" || index < all.length - 1);
+}
+
+function escapeHtml(value: string): string {
+  return value.replace(
+    /[&<>"]/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] ?? c,
+  );
+}
+
 /** Feuilles de données, identiques dans tous les formats d'export. */
 export function buildTables(
   layoutName: string,
   result: DimensioningResult,
+  settings: DimensioningSettings = DEFAULT_SETTINGS,
 ): XlsxSheet[] {
   const { racks, devices, cables, totals, summary } = result;
   const synthese: (string | number)[][] = [
@@ -36,6 +86,48 @@ export function buildTables(
   ];
   for (const [kind, info] of Object.entries(summary.byType)) {
     synthese.push([`Câbles ${kind} (x / m)`, `${info.count} / ${info.meters}`]);
+  }
+
+  // Matrice équipement -> équipement : une cellule par liaison.
+  const names = [...new Set(devices.map((d) => d.name))].sort();
+  const matrix: (string | number)[][] = [["De / Vers", ...names]];
+  for (const from of names) {
+    const row: (string | number)[] = [from];
+    for (const to of names) {
+      const links = cables.filter(
+        (c) =>
+          (c.aDevice === from && c.bDevice === to) ||
+          (c.bDevice === from && c.aDevice === to),
+      );
+      row.push(links.map((c) => `${c.id} (${c.lengthM} m)`).join(", "));
+    }
+    matrix.push(row);
+  }
+
+  // Matrice port -> port (uniquement les ports réellement câblés).
+  const connectedPorts = [
+    ...new Set(
+      cables.flatMap((c) => [
+        `${c.aDevice}/${c.aPort}`,
+        `${c.bDevice}/${c.bPort}`,
+      ]),
+    ),
+  ].sort();
+  const portMatrix: (string | number)[][] = [
+    ["Port / Port", ...connectedPorts],
+  ];
+  for (const a of connectedPorts) {
+    const row: (string | number)[] = [a];
+    for (const b of connectedPorts) {
+      const link = cables.find(
+        (c) =>
+          (`${c.aDevice}/${c.aPort}` === a &&
+            `${c.bDevice}/${c.bPort}` === b) ||
+          (`${c.bDevice}/${c.bPort}` === a && `${c.aDevice}/${c.aPort}` === b),
+      );
+      row.push(link ? `${link.id} · ${link.cableType}` : "");
+    }
+    portMatrix.push(row);
   }
 
   return [
@@ -123,6 +215,24 @@ export function buildTables(
       ],
     },
     {
+      name: "EquipementsPorts",
+      rows: [
+        ["Équipement", "Baie", "U", "Nom port", "Étiquette port", "Type port"],
+        ...devices.flatMap((d) =>
+          d.ports.map((p) => [
+            d.name,
+            d.rackName,
+            d.uStart,
+            p.name,
+            p.label,
+            p.kind,
+          ]),
+        ),
+      ],
+    },
+    { name: "MatriceCablage", rows: matrix },
+    { name: "MatricePorts", rows: portMatrix },
+    {
       name: "Cables",
       rows: [
         [
@@ -171,33 +281,23 @@ export function buildTables(
           "Type câble",
           "Longueur (m)",
           "Rôle",
+          "Texte imprimé",
         ],
-        ...cables.flatMap((c) => [
-          [
+        ...cables.flatMap((c) =>
+          (["A", "B"] as const).map((end) => [
             c.id,
-            "A",
-            `${c.id}-A`,
-            c.aDevice,
-            c.aPort,
-            c.aRack,
-            c.aU,
+            end,
+            `${c.id}-${end}`,
+            end === "A" ? c.aDevice : c.bDevice,
+            end === "A" ? c.aPort : c.bPort,
+            end === "A" ? c.aRack : c.bRack,
+            end === "A" ? c.aU : c.bU,
             c.cableType,
             c.lengthM,
             c.role,
-          ],
-          [
-            c.id,
-            "B",
-            `${c.id}-B`,
-            c.bDevice,
-            c.bPort,
-            c.bRack,
-            c.bU,
-            c.cableType,
-            c.lengthM,
-            c.role,
-          ],
-        ]),
+            renderLabel(c, end, settings.labelFormat).join(" / "),
+          ]),
+        ),
       ],
     },
     {
@@ -233,46 +333,69 @@ export function buildTables(
 export async function exportXlsx(
   layoutName: string,
   result: DimensioningResult,
+  settings: DimensioningSettings = DEFAULT_SETTINGS,
 ): Promise<Blob> {
-  return buildXlsx(buildTables(layoutName, result));
+  return buildXlsx(buildTables(layoutName, result, settings));
 }
 
 export async function exportCsvZip(
   layoutName: string,
   result: DimensioningResult,
+  settings: DimensioningSettings = DEFAULT_SETTINGS,
 ): Promise<Blob> {
   const zip = new JSZip();
-  for (const sheet of buildTables(layoutName, result)) {
+  for (const sheet of buildTables(layoutName, result, settings)) {
     zip.file(`${sheet.name}.csv`, toCsv(sheet.rows));
   }
   return zip.generateAsync({ type: "blob", mimeType: "application/zip" });
 }
 
-function escapeHtml(value: string): string {
-  return value.replace(
-    /[&<>"]/g,
-    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] ?? c,
-  );
-}
-
-export function exportLabelsHtml(result: DimensioningResult): Blob {
-  const cards = result.cables.flatMap((c) => [
-    `<div class="label"><div class="ref">${c.id}A</div><div class="main">${escapeHtml(
-      c.aDevice,
-    )}/${escapeHtml(c.aPort)}</div><div class="sub">${escapeHtml(c.aRack)} / U${
-      c.aU
-    } · ${escapeHtml(c.cableType)} · ${c.lengthM.toFixed(1)} m</div><div class="foot">${escapeHtml(
-      c.role || c.id,
-    )}</div></div>`,
-    `<div class="label"><div class="ref">${c.id}B</div><div class="main">${escapeHtml(
-      c.bDevice,
-    )}/${escapeHtml(c.bPort)}</div><div class="sub">${escapeHtml(c.bRack)} / U${
-      c.bU
-    } · ${escapeHtml(c.cableType)} · ${c.lengthM.toFixed(1)} m</div><div class="foot">${escapeHtml(
-      c.role || c.id,
-    )}</div></div>`,
-  ]);
-  const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Étiquettes de câblage</title><style>@page{size:A4;margin:12mm}body{font-family:Consolas,monospace;margin:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}.label{border:1px dashed #333;padding:3mm;min-height:22mm;page-break-inside:avoid}.ref{font-weight:bold;font-size:12pt}.main{font-size:10pt;margin-top:2mm}.sub{font-size:8pt;color:#555;margin-top:1mm}.foot{font-size:7pt;color:#888;margin-top:1mm}</style></head><body><div class="grid">${cards.join(
+/** Planche d'étiquettes imprimable, avec QR code par extrémité. */
+export async function exportLabelsHtml(
+  result: DimensioningResult,
+  settings: DimensioningSettings = DEFAULT_SETTINGS,
+): Promise<Blob> {
+  const cards: string[] = [];
+  for (const cable of result.cables) {
+    for (const end of ["A", "B"] as const) {
+      const lines = renderLabel(cable, end, settings.labelFormat);
+      const payload = [
+        cable.id,
+        end,
+        lines[0] ?? "",
+        lines[1] ?? "",
+        lines[2] ?? "",
+        `${cable.lengthM}m`,
+      ].join("|");
+      const qr = await QRCode.toDataURL(payload, {
+        width: 84,
+        margin: 0,
+        errorCorrectionLevel: "M",
+      });
+      cards.push(
+        `<div class="label"><div class="qr"><img src="${qr}" alt="QR ${cable.id}${end}"></div>` +
+          `<div class="lines">${lines
+            .map((line, i) => `<div class="l${i}">${escapeHtml(line)}</div>`)
+            .join("")}</div></div>`,
+      );
+    }
+  }
+  const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Étiquettes de câblage</title><style>
+@page { size:A4; margin:10mm; }
+* { box-sizing:border-box; }
+body { font-family:Consolas,"Courier New",monospace; margin:0; }
+h1 { font-family:"Segoe UI",Arial,sans-serif; font-size:14pt; margin:0 0 8mm; }
+.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; }
+.label { display:flex; gap:3mm; align-items:center; border:1px dashed #333; padding:2mm;
+         min-height:24mm; page-break-inside:avoid; }
+.qr img { width:20mm; height:20mm; }
+.lines { flex:1; min-width:0; }
+.l0 { font-weight:bold; font-size:12pt; }
+.l1 { font-size:10pt; margin-top:1.5mm; word-break:break-all; }
+.l2 { font-size:8pt; color:#444; margin-top:1.5mm; }
+.l3 { font-size:8pt; color:#666; margin-top:1mm; }
+@media print { h1 { display:none; } }
+</style></head><body><h1>Planche d'étiquettes — ${result.cables.length} câbles</h1><div class="grid">${cards.join(
     "",
   )}</div></body></html>`;
   return new Blob([html], { type: "text/html;charset=utf-8" });
