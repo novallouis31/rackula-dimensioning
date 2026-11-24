@@ -99,6 +99,24 @@
   import { Tooltip } from "bits-ui";
   import { debounce } from "$lib/utils/debounce";
 
+  /**
+   * Greffe RackPlanner : panneau de dimensionnement chargé à la demande afin
+   * de ne pas gonfler le bundle initial de Rackula.
+   */
+  type DimensioningComponent =
+    typeof import("$lib/components/DimensioningDialog.svelte").default;
+  let DimensioningDialog = $state<DimensioningComponent | null>(null);
+  let dimensioningOpen = $state(false);
+
+  async function openDimensioning() {
+    if (!DimensioningDialog) {
+      DimensioningDialog = (
+        await import("$lib/components/DimensioningDialog.svelte")
+      ).default;
+    }
+    dimensioningOpen = true;
+  }
+
   const layoutStore = getLayoutStore();
   const workspaceStore = getWorkspaceStore();
   const selectionStore = getSelectionStore();
@@ -735,6 +753,21 @@
   <div class="app-layout">
     <Toolbar {partyMode} onlayoutexport={handleLayoutExport} />
 
+    <button
+      class="dim-fab"
+      type="button"
+      onclick={openDimensioning}
+      title="Dimensionnement : TDP, poids, puissance, PDU, câbles et étiquettes"
+    >
+      ⚡ Dimensionnement
+    </button>
+    {#if DimensioningDialog}
+      <DimensioningDialog
+        open={dimensioningOpen}
+        onclose={() => (dimensioningOpen = false)}
+      />
+    {/if}
+
     <RackIndicator />
 
     <main class="app-main" class:mobile={viewportStore.isMobile}>
@@ -887,6 +920,26 @@
 </Tooltip.Provider>
 
 <style>
+  .dim-fab {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 9000;
+    background: #2563eb;
+    color: #fff;
+    border: 0;
+    border-radius: 22px;
+    padding: 10px 16px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+  .dim-fab:hover {
+    background: #1d4ed8;
+  }
+
   .app-layout {
     display: flex;
     flex-direction: column;

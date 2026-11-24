@@ -1,0 +1,1194 @@
+{
+  "version": "1.0.0",
+  "name": "Baie TYPE — Référence",
+  "racks": [
+    {
+      "id": "rack-type",
+      "name": "Baie TYPE 42U",
+      "height": 42,
+      "width": 19,
+      "devices": [
+        {
+          "id": "pdu-a",
+          "device_type": "pdu-0u",
+          "name": "PDU-A",
+          "position": 6,
+          "face": "front",
+          "ports": [
+            {
+              "id": "pdu-a:out-01",
+              "template_name": "out-01",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-02",
+              "template_name": "out-02",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-03",
+              "template_name": "out-03",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-04",
+              "template_name": "out-04",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-05",
+              "template_name": "out-05",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-06",
+              "template_name": "out-06",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-07",
+              "template_name": "out-07",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-08",
+              "template_name": "out-08",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-09",
+              "template_name": "out-09",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-10",
+              "template_name": "out-10",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-11",
+              "template_name": "out-11",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-12",
+              "template_name": "out-12",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-13",
+              "template_name": "out-13",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-a:out-14",
+              "template_name": "out-14",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            }
+          ]
+        },
+        {
+          "id": "pdu-b",
+          "device_type": "pdu-0u",
+          "name": "PDU-B",
+          "position": 6,
+          "face": "front",
+          "ports": [
+            {
+              "id": "pdu-b:out-01",
+              "template_name": "out-01",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-02",
+              "template_name": "out-02",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-03",
+              "template_name": "out-03",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-04",
+              "template_name": "out-04",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-05",
+              "template_name": "out-05",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-06",
+              "template_name": "out-06",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-07",
+              "template_name": "out-07",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-08",
+              "template_name": "out-08",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-09",
+              "template_name": "out-09",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-10",
+              "template_name": "out-10",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-11",
+              "template_name": "out-11",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-12",
+              "template_name": "out-12",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-13",
+              "template_name": "out-13",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            },
+            {
+              "id": "pdu-b:out-14",
+              "template_name": "out-14",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            }
+          ]
+        },
+        {
+          "id": "ups",
+          "device_type": "ups-3u",
+          "name": "UPS-01",
+          "position": 144,
+          "face": "front",
+          "ports": [
+            {
+              "id": "ups:in",
+              "template_name": "in",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "pdu-h",
+          "device_type": "pdu-1u-32a",
+          "name": "PDU-H",
+          "position": 138,
+          "face": "front",
+          "ports": [
+            {
+              "id": "pdu-h:out-01",
+              "template_name": "out-01",
+              "template_index": 0,
+              "type": "iec-60320-c13"
+            }
+          ]
+        },
+        {
+          "id": "stor",
+          "device_type": "stor-2u",
+          "name": "SAN-01",
+          "position": 168,
+          "face": "front",
+          "ports": [
+            {
+              "id": "stor:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "stor:sfp-02",
+              "template_name": "sfp-02",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "stor:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "stor:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "srv01",
+          "device_type": "srv-1u",
+          "name": "srv01",
+          "position": 216,
+          "face": "front",
+          "ports": [
+            {
+              "id": "srv01:mgmt1",
+              "template_name": "mgmt1",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv01:eth-01",
+              "template_name": "eth-01",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv01:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "srv01:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "srv01:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "srv02",
+          "device_type": "srv-1u",
+          "name": "srv02",
+          "position": 210,
+          "face": "front",
+          "ports": [
+            {
+              "id": "srv02:mgmt1",
+              "template_name": "mgmt1",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv02:eth-01",
+              "template_name": "eth-01",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv02:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "srv02:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "srv02:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "srv03",
+          "device_type": "srv-1u",
+          "name": "srv03",
+          "position": 204,
+          "face": "front",
+          "ports": [
+            {
+              "id": "srv03:mgmt1",
+              "template_name": "mgmt1",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv03:eth-01",
+              "template_name": "eth-01",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv03:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "srv03:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "srv03:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "srv04",
+          "device_type": "srv-1u",
+          "name": "srv04",
+          "position": 198,
+          "face": "front",
+          "ports": [
+            {
+              "id": "srv04:mgmt1",
+              "template_name": "mgmt1",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv04:eth-01",
+              "template_name": "eth-01",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv04:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "srv04:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "srv04:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "srv05",
+          "device_type": "srv-1u",
+          "name": "srv05",
+          "position": 192,
+          "face": "front",
+          "ports": [
+            {
+              "id": "srv05:mgmt1",
+              "template_name": "mgmt1",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv05:eth-01",
+              "template_name": "eth-01",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv05:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "srv05:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "srv05:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "srv06",
+          "device_type": "srv-1u",
+          "name": "srv06",
+          "position": 186,
+          "face": "front",
+          "ports": [
+            {
+              "id": "srv06:mgmt1",
+              "template_name": "mgmt1",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv06:eth-01",
+              "template_name": "eth-01",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv06:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "srv06:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "srv06:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "srv07",
+          "device_type": "srv-1u",
+          "name": "srv07",
+          "position": 180,
+          "face": "front",
+          "ports": [
+            {
+              "id": "srv07:mgmt1",
+              "template_name": "mgmt1",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv07:eth-01",
+              "template_name": "eth-01",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "srv07:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "srv07:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "srv07:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "patch",
+          "device_type": "patch-24",
+          "name": "PP-01",
+          "position": 222,
+          "face": "front",
+          "ports": [
+            {
+              "id": "patch:p-01",
+              "template_name": "p-01",
+              "template_index": 0,
+              "type": "1000base-t"
+            }
+          ]
+        },
+        {
+          "id": "sw-acc",
+          "device_type": "sw-48g",
+          "name": "SW-ACC-01",
+          "position": 228,
+          "face": "front",
+          "ports": [
+            {
+              "id": "sw-acc:ge-01",
+              "template_name": "ge-01",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "sw-acc:ge-02",
+              "template_name": "ge-02",
+              "template_index": 0,
+              "type": "1000base-t"
+            },
+            {
+              "id": "sw-acc:uplink-01",
+              "template_name": "uplink-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "sw-acc:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "sw-acc:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "fw",
+          "device_type": "fw-2u",
+          "name": "FW-01",
+          "position": 234,
+          "face": "front",
+          "ports": [
+            {
+              "id": "fw:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "25gbase-x-sfp28"
+            },
+            {
+              "id": "fw:sfp-02",
+              "template_name": "sfp-02",
+              "template_index": 0,
+              "type": "25gbase-x-sfp28"
+            },
+            {
+              "id": "fw:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "fw:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "sw-core",
+          "device_type": "sw-24s",
+          "name": "SW-CORE-01",
+          "position": 246,
+          "face": "front",
+          "ports": [
+            {
+              "id": "sw-core:sfp-01",
+              "template_name": "sfp-01",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "sw-core:sfp-08",
+              "template_name": "sfp-08",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "sw-core:sfp-09",
+              "template_name": "sfp-09",
+              "template_index": 0,
+              "type": "10gbase-x-sfpp"
+            },
+            {
+              "id": "sw-core:uplink-01",
+              "template_name": "uplink-01",
+              "template_index": 0,
+              "type": "100gbase-x-qsfp28"
+            },
+            {
+              "id": "sw-core:PSU-01",
+              "template_name": "PSU-01",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            },
+            {
+              "id": "sw-core:PSU-02",
+              "template_name": "PSU-02",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        },
+        {
+          "id": "kvm",
+          "device_type": "kvm-1u",
+          "name": "KVM-01",
+          "position": 252,
+          "face": "front",
+          "ports": [
+            {
+              "id": "kvm:PSU",
+              "template_name": "PSU",
+              "template_index": 0,
+              "type": "iec-60320-c14"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "device_types": [
+    {
+      "slug": "srv-1u",
+      "category": "server",
+      "u_height": 1,
+      "weight": 18,
+      "weight_unit": "kg",
+      "custom_fields": {
+        "dim.powerW": 450,
+        "dim.tdpW": 450
+      },
+      "interfaces": [
+        {
+          "name": "mgmt1",
+          "type": "1000base-t"
+        },
+        {
+          "name": "eth-01",
+          "type": "1000base-t"
+        },
+        {
+          "name": "eth-02",
+          "type": "1000base-t"
+        },
+        {
+          "name": "sfp-01",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-02",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "PSU-01",
+          "type": "iec-60320-c14"
+        },
+        {
+          "name": "PSU-02",
+          "type": "iec-60320-c14"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "srv-2u",
+      "category": "server",
+      "u_height": 2,
+      "weight": 32,
+      "weight_unit": "kg",
+      "custom_fields": {
+        "dim.powerW": 750,
+        "dim.tdpW": 750
+      },
+      "interfaces": [
+        {
+          "name": "mgmt",
+          "type": "1000base-t"
+        },
+        {
+          "name": "sfp-01",
+          "type": "25gbase-x-sfp28"
+        },
+        {
+          "name": "PSU-01",
+          "type": "iec-60320-c14"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "sw-48g",
+      "category": "network",
+      "u_height": 1,
+      "weight": 9,
+      "weight_unit": "kg",
+      "custom_fields": {
+        "dim.powerW": 180,
+        "dim.tdpW": 180
+      },
+      "interfaces": [
+        {
+          "name": "ge-01",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-02",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-03",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-04",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-05",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-06",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-07",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-08",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-09",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-10",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-11",
+          "type": "1000base-t"
+        },
+        {
+          "name": "ge-12",
+          "type": "1000base-t"
+        },
+        {
+          "name": "uplink-01",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "PSU-01",
+          "type": "iec-60320-c14"
+        },
+        {
+          "name": "PSU-02",
+          "type": "iec-60320-c14"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "sw-24s",
+      "category": "network",
+      "u_height": 1,
+      "weight": 11,
+      "weight_unit": "kg",
+      "custom_fields": {
+        "dim.powerW": 320,
+        "dim.tdpW": 320
+      },
+      "interfaces": [
+        {
+          "name": "sfp-01",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-02",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-03",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-04",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-05",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-06",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-07",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-08",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-09",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-10",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "uplink-01",
+          "type": "100gbase-x-qsfp28"
+        },
+        {
+          "name": "PSU-01",
+          "type": "iec-60320-c14"
+        },
+        {
+          "name": "PSU-02",
+          "type": "iec-60320-c14"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "fw-2u",
+      "category": "firewall",
+      "u_height": 2,
+      "weight": 24,
+      "weight_unit": "kg",
+      "custom_fields": {
+        "dim.powerW": 420,
+        "dim.tdpW": 420
+      },
+      "interfaces": [
+        {
+          "name": "sfp-01",
+          "type": "25gbase-x-sfp28"
+        },
+        {
+          "name": "sfp-02",
+          "type": "25gbase-x-sfp28"
+        },
+        {
+          "name": "PSU-01",
+          "type": "iec-60320-c14"
+        },
+        {
+          "name": "PSU-02",
+          "type": "iec-60320-c14"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "stor-2u",
+      "category": "storage",
+      "u_height": 2,
+      "weight": 28,
+      "weight_unit": "kg",
+      "custom_fields": {
+        "dim.powerW": 600,
+        "dim.tdpW": 600
+      },
+      "interfaces": [
+        {
+          "name": "sfp-01",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "sfp-02",
+          "type": "10gbase-x-sfpp"
+        },
+        {
+          "name": "PSU-01",
+          "type": "iec-60320-c14"
+        },
+        {
+          "name": "PSU-02",
+          "type": "iec-60320-c14"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "kvm-1u",
+      "category": "other",
+      "u_height": 1,
+      "weight": 8,
+      "weight_unit": "kg",
+      "custom_fields": {
+        "dim.powerW": 60,
+        "dim.tdpW": 60
+      },
+      "interfaces": [
+        {
+          "name": "PSU",
+          "type": "iec-60320-c14"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "ups-3u",
+      "category": "power",
+      "u_height": 3,
+      "weight": 45,
+      "weight_unit": "kg",
+      "custom_fields": {},
+      "interfaces": [
+        {
+          "name": "in",
+          "type": "iec-60320-c14"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "patch-24",
+      "category": "patch-panel",
+      "u_height": 1,
+      "weight": 3,
+      "weight_unit": "kg",
+      "custom_fields": {},
+      "interfaces": [
+        {
+          "name": "p-01",
+          "type": "1000base-t"
+        },
+        {
+          "name": "p-02",
+          "type": "1000base-t"
+        },
+        {
+          "name": "p-03",
+          "type": "1000base-t"
+        },
+        {
+          "name": "p-04",
+          "type": "1000base-t"
+        },
+        {
+          "name": "p-05",
+          "type": "1000base-t"
+        },
+        {
+          "name": "p-06",
+          "type": "1000base-t"
+        },
+        {
+          "name": "p-07",
+          "type": "1000base-t"
+        },
+        {
+          "name": "p-08",
+          "type": "1000base-t"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "pdu-0u",
+      "category": "power",
+      "u_height": 0.5,
+      "weight": 6,
+      "weight_unit": "kg",
+      "custom_fields": {
+        "dim.mount": "vertical",
+        "dim.pduAmps": 16,
+        "dim.pduVolts": 230
+      },
+      "interfaces": [
+        {
+          "name": "out-01",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-02",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-03",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-04",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-05",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-06",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-07",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-08",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-09",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-10",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-11",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-12",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-13",
+          "type": "iec-60320-c13"
+        },
+        {
+          "name": "out-14",
+          "type": "iec-60320-c13"
+        }
+      ],
+      "colour": "#3b82f6"
+    },
+    {
+      "slug": "pdu-1u-32a",
+      "category": "power",
+      "u_height": 1,
+      "weight": 7,
+      "weight_unit": "kg",
+      "custom_fields": {
+        "dim.mount": "horizontal",
+        "dim.pduAmps": 32,
+        "dim.pduVolts": 230
+      },
+      "interfaces": [
+        {
+          "name": "out-01",
+          "type": "iec-60320-c13"
+        }
+      ],
+      "colour": "#3b82f6"
+    }
+  ],
+  "settings": {},
+  "connections": [
+    {
+      "id": "lnk-001",
+      "a_port_id": "srv01:sfp-01",
+      "b_port_id": "sw-core:sfp-01",
+      "label": "data"
+    },
+    {
+      "id": "lnk-002",
+      "a_port_id": "srv02:sfp-01",
+      "b_port_id": "sw-core:sfp-01",
+      "label": "data"
+    },
+    {
+      "id": "lnk-003",
+      "a_port_id": "srv03:sfp-01",
+      "b_port_id": "sw-core:sfp-01",
+      "label": "data"
+    },
+    {
+      "id": "lnk-004",
+      "a_port_id": "srv04:sfp-01",
+      "b_port_id": "sw-core:sfp-01",
+      "label": "data"
+    },
+    {
+      "id": "lnk-005",
+      "a_port_id": "srv05:sfp-01",
+      "b_port_id": "sw-core:sfp-01",
+      "label": "data"
+    },
+    {
+      "id": "lnk-006",
+      "a_port_id": "srv06:sfp-01",
+      "b_port_id": "sw-core:sfp-01",
+      "label": "data"
+    },
+    {
+      "id": "lnk-007",
+      "a_port_id": "srv07:sfp-01",
+      "b_port_id": "sw-core:sfp-01",
+      "label": "data"
+    },
+    {
+      "id": "lnk-008",
+      "a_port_id": "stor:sfp-01",
+      "b_port_id": "sw-core:sfp-08",
+      "label": "storage"
+    },
+    {
+      "id": "lnk-009",
+      "a_port_id": "stor:sfp-02",
+      "b_port_id": "sw-core:sfp-09",
+      "label": "storage"
+    },
+    {
+      "id": "lnk-010",
+      "a_port_id": "sw-core:uplink-01",
+      "b_port_id": "fw:sfp-01",
+      "label": "uplink"
+    },
+    {
+      "id": "lnk-011",
+      "a_port_id": "fw:sfp-02",
+      "b_port_id": "sw-acc:uplink-01",
+      "label": "uplink"
+    },
+    {
+      "id": "lnk-012",
+      "a_port_id": "pdu-h:out-01",
+      "b_port_id": "ups:in",
+      "label": "power"
+    }
+  ]
+}
