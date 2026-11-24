@@ -1,14 +1,14 @@
 {
-  "name": "rackula",
+  "name": "rackula-planner",
   "version": "26.11.1",
-  "description": "Drag and drop rack visualizer",
+  "description": "Rackula fork with rack dimensioning, cabling matrix and printable labels",
   "author": "ggfevans",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/RackulaLives/Rackula.git"
+    "url": "https://github.com/novallouis31/rackula-planner.git"
   },
-  "homepage": "https://github.com/RackulaLives/Rackula",
+  "homepage": "https://github.com/novallouis31/rackula-planner",
   "private": true,
   "type": "module",
   "scripts": {

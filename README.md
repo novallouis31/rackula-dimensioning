@@ -31,7 +31,7 @@
 
 ## Fork — greffe « dimensionnement »
 
-Ce dépôt est un fork de **Rackula** (MIT, © Gareth Evans) qui conserve toutes les fonctionnalités amont et ajoute un module de **dimensionnement de baie** issu de [`rack-42u-planner`](https://github.com/novallouis31/rack-42u-planner) :
+**Rackula-planner** est un fork de **Rackula** (MIT, © Gareth Evans) qui conserve toutes les fonctionnalités amont et ajoute un module de **dimensionnement de baie** repris de l'ancien projet Python `rack-42u-planner` (aujourd'hui retiré) :
 
 - bouton flottant **⚡ Dimensionnement** : TDP (W et BTU/h), poids, puissance, courant, capacité et charge **PDU** ;
 - **nommage de chaque équipement** et proposition d'un numéro de port entrée/sortie (`ETH-IN-01`, `FIB-OUT-02`, `PWR-IN-01`…) ;

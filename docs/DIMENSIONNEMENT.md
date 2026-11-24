@@ -1,8 +1,8 @@
 # Greffe « dimensionnement » sur Rackula
 
-Ce dépôt est un **fork de [Rackula](https://github.com/RackulaLives/Rackula)** (MIT, © Gareth Evans) qui conserve intégralement le déploiement, la bibliothèque de serveurs/équipements et l'interface amont. Il y ajoute les contraintes de `rack-42u-planner` : dimensionnement électrique/thermique, **matrice de câblage**, calcul des longueurs et **planches d'étiquettes imprimables**.
+**Rackula-planner** est un **fork de [Rackula](https://github.com/RackulaLives/Rackula)** (MIT, © Gareth Evans) qui conserve intégralement le déploiement, la bibliothèque de serveurs/équipements et l'interface amont. Il y ajoute le dimensionnement électrique/thermique, la **matrice de câblage**, le calcul des longueurs et les **planches d'étiquettes imprimables**.
 
-Le projet Python autonome `rack-42u-planner` est abandonné au profit de ce fork : toutes les fonctionnalités utiles y ont été reportées.
+Le projet Python autonome `rack-42u-planner` a été supprimé : toutes ses fonctionnalités utiles ont été reportées ici.
 
 ## Utilisation
 
