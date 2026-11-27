@@ -42,6 +42,12 @@
 
 Documentation complète : [docs/DIMENSIONNEMENT.md](docs/DIMENSIONNEMENT.md).
 
+### Version portable Windows (sans Docker)
+
+Un paquet prêt à l'emploi est publié dans les [Releases](https://github.com/novallouis31/rackula-planner/releases) : décompresser le ZIP, double-cliquer sur `Lancer-Rackula-Planner.cmd`, c'est tout. Aucun Docker, aucun Node.js, aucun droit administrateur : un mini serveur HTTP PowerShell sert l'application sur `http://127.0.0.1:8420/`, en boucle locale uniquement.
+
+Depuis les sources : `npm run build` puis `.\Lancer-Rackula-Planner.ps1`. Pour fabriquer le ZIP : `.\tools\Build-Portable.ps1`. Options, stockage des données et dépannage : [docs/PORTABLE-WINDOWS.md](docs/PORTABLE-WINDOWS.md).
+
 ```bash
 npm install
 npm run dev            # puis cliquer sur ⚡ Dimensionnement
@@ -60,6 +66,7 @@ npx vitest run src/lib/dimensioning
 - Bayed rack grouping for AV installs and multi-cabinet deployments
 - Optional persistent storage with API-backed layout sync
 - Self-hostable via Docker, Proxmox LXC, or bare metal
+- Portable Windows launcher (PowerShell, no Docker or Node.js required)
 - Optional auth with local accounts or OIDC for shared deployments
 
 ## Who It's For
