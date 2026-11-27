@@ -191,18 +191,52 @@ $sizeMb = [math]::Round((($files | Measure-Object Length -Sum).Sum / 1MB), 1)
 Write-Host ("  Paquet : {0} ({1} fichiers, {2} Mo)" -f $stage, $files.Count, $sizeMb) -ForegroundColor Green
 
 if (-not $NoZip) {
+    Add-Type -AssemblyName System.IO.Compression
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     $zip = Join-Path $OutputDir ("rackula-planner-portable-{0}.zip" -f $version)
     if (Test-Path -LiteralPath $zip) {
         Remove-Item -LiteralPath $zip -Force
     }
     Write-Host "  Creation du ZIP..." -ForegroundColor Yellow
-    [System.IO.Compression.ZipFile]::CreateFromDirectory(
-        $stage,
-        $zip,
-        [System.IO.Compression.CompressionLevel]::Optimal,
-        $true
-    )
+
+    # Creation manuelle des entrees : ZipFile.CreateFromDirectory ecrit des
+    # separateurs "\" sous .NET Framework, ce qui viole la specification ZIP.
+    # On force des "/" pour rester compatible avec tous les extracteurs.
+    $baseName = Split-Path -Leaf $stage
+    $zipStream = [System.IO.File]::Open($zip, [System.IO.FileMode]::Create)
+    try {
+        $archive = New-Object -TypeName System.IO.Compression.ZipArchive -ArgumentList @(
+            $zipStream,
+            [System.IO.Compression.ZipArchiveMode]::Create,
+            $false
+        )
+        try {
+            foreach ($file in (Get-ChildItem -LiteralPath $stage -Recurse -File)) {
+                $relative = $file.FullName.Substring($stage.Length + 1).Replace("\", "/")
+                $entryName = "$baseName/$relative"
+                $entry = $archive.CreateEntry(
+                    $entryName,
+                    [System.IO.Compression.CompressionLevel]::Optimal
+                )
+                $entryStream = $entry.Open()
+                try {
+                    $input = [System.IO.File]::OpenRead($file.FullName)
+                    try {
+                        $input.CopyTo($entryStream, 65536)
+                    } finally {
+                        $input.Dispose()
+                    }
+                } finally {
+                    $entryStream.Dispose()
+                }
+            }
+        } finally {
+            $archive.Dispose()
+        }
+    } finally {
+        $zipStream.Dispose()
+    }
+
     $zipMb = [math]::Round(((Get-Item -LiteralPath $zip).Length / 1MB), 1)
     Write-Host ("  Archive : {0} ({1} Mo)" -f $zip, $zipMb) -ForegroundColor Green
 }
