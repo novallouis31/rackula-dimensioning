@@ -1,0 +1,4 @@
+﻿Rackula-planner 26.11.1
+commit: 62fcad7a
+build:  2026-11-27T07:14:10.627Z
+package: portable Windows (sans Docker)

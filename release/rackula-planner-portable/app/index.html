@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Fallback CSP for hosting paths that bypass the nginx headers (see
+         deploy/security-headers.conf, the single source of truth for the
+         server-sent policy). Meta CSP cannot carry frame-ancestors (browsers
+         ignore it on a <meta> element), so clickjacking protection there is
+         server-only; a bare static serve loses that layer but keeps the rest. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; base-uri 'self'; form-action 'self';"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicon.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicon-light.png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <!-- Color scheme hints for iOS Safari -->
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#21222c" />
+    <title>Rackula - Rack Layout Designer</title>
+    <script type="module" crossorigin src="/assets/main-B1G_TY4f.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-COiEfhsA.js">
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-P2Xu9kJm.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-svelte-D-AeKg9P.js">
+    <link rel="modulepreload" crossorigin href="/assets/data-brandpacks-CheqZa8r.js">
+    <link rel="modulepreload" crossorigin href="/assets/data-images-D2EF0NYT.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-pako-DoEuamHc.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-panzoom-kp-2rsrZ.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-icons-dLKucDXV.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-markdown-CGWemjm3.js">
+    <link rel="stylesheet" crossorigin href="/assets/main-B1c793dS.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- Runtime deployment config (window.__RACKULA_CONFIG__). static/config.js
+         ships a browser-mode default in every build; container deployments
+         (Docker entrypoint, LXC install/update scripts) overwrite it at runtime.
+         CROSS-REF: static/config.js, deploy/docker-entrypoint-wrapper.sh,
+         deploy/lxc/community-scripts/{install/rackula-install.sh,ct/rackula.sh} -->
+    <script src="/config.js" ></script>
+  </body>
+</html>

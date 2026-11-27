@@ -11,3 +11,9 @@ static/schemas/
 # Design spec assets from the M12 mobile UX brainstorm (#2467).
 # The HTML mockup is a one-off design artifact, not production code.
 docs/superpowers/specs/assets/
+
+# Generated portable Windows package. The bundles are build artifacts and must
+# stay byte-identical to what tools/Build-Portable.ps1 produced; reformatting
+# them would bloat the package and break its reproducibility.
+release/rackula-planner-portable/
+release/*.zip

@@ -1,0 +1,38 @@
+﻿Rackula-planner 26.11.1 - version portable Windows
+========================================================
+
+Aucune installation, aucun Docker, aucun droit administrateur.
+Seul PowerShell (fourni avec Windows) est necessaire.
+
+Demarrage
+---------
+1. Decompresser ce dossier ou vous voulez.
+2. Double-cliquer sur "Lancer-Rackula-Planner.cmd".
+   Le navigateur s'ouvre sur http://127.0.0.1:8420/
+
+Si Windows affiche un avertissement au decompressage :
+clic droit sur le fichier ZIP > Proprietes > cocher "Debloquer",
+puis decompresser a nouveau.
+
+Donnees
+-------
+Les plans sont enregistres par le navigateur (IndexedDB) pour l'adresse
+http://127.0.0.1:8420. Gardez le meme port pour les retrouver.
+Exportez regulierement vos layouts (.rackula.yaml) depuis l'application :
+c'est la seule sauvegarde portable d'un PC a un autre.
+
+Options
+-------
+Lancer-Rackula-Planner.cmd -Port 9000        autre port (donnees separees)
+Lancer-Rackula-Planner.cmd -NoBrowser        ne pas ouvrir le navigateur
+Lancer-Rackula-Planner.cmd -VerboseRequests  journaliser les requetes
+
+Arret : Ctrl+C dans la fenetre noire.
+
+Contenu
+-------
+app\                          application compilee (Rackula + dimensionnement)
+Lancer-Rackula-Planner.ps1    serveur HTTP local + ouverture du navigateur
+Lancer-Rackula-Planner.cmd    lanceur double-clic
+LICENSE                       licence MIT (Rackula, (c) Gareth Evans)
+VERSION.txt                   version, commit et date de compilation

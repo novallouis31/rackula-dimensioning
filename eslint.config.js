@@ -238,6 +238,7 @@ export default defineConfig(
       "build/",
       ".svelte-kit/",
       "dist/",
+      "release/",
       "node_modules/",
       "coverage/",
       "docs/research/",
